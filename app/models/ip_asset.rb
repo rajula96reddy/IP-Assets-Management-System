@@ -1,0 +1,2 @@
+class IpAsset < ApplicationRecord
+end

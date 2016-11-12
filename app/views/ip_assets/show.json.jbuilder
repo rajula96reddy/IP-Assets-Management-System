@@ -1,0 +1,1 @@
+json.partial! "ip_assets/ip_asset", ip_asset: @ip_asset

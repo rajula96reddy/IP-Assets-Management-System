@@ -1,0 +1,1 @@
+json.array! @ip_assets, partial: 'ip_assets/ip_asset', as: :ip_asset
