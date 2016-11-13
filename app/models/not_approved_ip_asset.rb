@@ -1,0 +1,2 @@
+class NotApprovedIpAsset < ApplicationRecord
+end

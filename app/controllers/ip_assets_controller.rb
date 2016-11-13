@@ -1,5 +1,5 @@
 class IpAssetsController < ApplicationController
-  before_action :set_ip_asset, only: [:show, :edit, :update, :destroy]
+  before_action :set_ip_asset, only: [:show, :edit, :update, :destroy, :copy]
 
   # GET /ip_assets
   # GET /ip_assets.json
@@ -11,8 +11,7 @@ class IpAssetsController < ApplicationController
   # GET /ip_assets/1.json
   def show
   end
-
-  # GET /ip_assets/new
+    # GET /ip_assets/new
   def new
     @ip_asset = IpAsset.new
   end

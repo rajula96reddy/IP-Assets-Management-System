@@ -1,0 +1,1 @@
+json.array! @not_approved_ip_assets, partial: 'not_approved_ip_assets/not_approved_ip_asset', as: :not_approved_ip_asset

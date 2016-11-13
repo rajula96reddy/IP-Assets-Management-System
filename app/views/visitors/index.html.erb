@@ -4,5 +4,9 @@
 <% if user_signed_in? %>
   
   	<li><%= link_to "View IP assets",ip_assets_path%></li>
-  	<li><%= link_to "Add IP assets",new_ip_asset_path%></li>
+  	<li><%= link_to "Add IP assets",new_not_approved_ip_asset_path%></li>
 <% end %>
+ <% if current_user.try(:admin?) %>
+   	<li><%= link_to "View Not Approved IP assets",not_approved_ip_assets_path%></li>
+  <% end %>
+

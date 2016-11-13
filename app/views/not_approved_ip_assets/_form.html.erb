@@ -1,0 +1,32 @@
+<%= form_for(not_approved_ip_asset) do |f| %>
+  <% if not_approved_ip_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(not_approved_ip_asset.errors.count, "error") %> prohibited this not_approved_ip_asset from being saved:</h2>
+
+      <ul>
+      <% not_approved_ip_asset.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Research_group_ID %>
+    <%= f.number_field :Research_group_ID %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Type %>
+    <%= f.text_field :Type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Labs_Associated %>
+    <%= f.text_field :Labs_Associated %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

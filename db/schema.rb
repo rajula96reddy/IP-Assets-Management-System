@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112113937) do
+ActiveRecord::Schema.define(version: 20161112174328) do
 
   create_table "ip_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "Research_group_ID"
+    t.string   "Type"
+    t.string   "Labs_Associated"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "not_approved_ip_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "Research_group_ID"
     t.string   "Type"
     t.string   "Labs_Associated"
@@ -35,6 +43,7 @@ ActiveRecord::Schema.define(version: 20161112113937) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "role"
+    t.integer  "Research_Groups"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

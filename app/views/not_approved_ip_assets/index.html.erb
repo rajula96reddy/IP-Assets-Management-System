@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Not Approved Ip Assets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Research group id</th>
+      <th>Type</th>
+      <th>Labs associated</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @not_approved_ip_assets.each do |not_approved_ip_asset| %>
+      <tr>
+        <td><%= not_approved_ip_asset.Research_group_ID %></td>
+        <td><%= not_approved_ip_asset.Type %></td>
+        <td><%= not_approved_ip_asset.Labs_Associated %></td>
+        <td><%= link_to 'Show', not_approved_ip_asset %></td>
+        <td><%= link_to 'Edit', edit_not_approved_ip_asset_path(not_approved_ip_asset) %></td>
+        <td><%= link_to 'Approve', IpAsset.copy(not_approved_ip_asset) ,data:{ confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', not_approved_ip_asset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Not Approved Ip Asset', new_not_approved_ip_asset_path %>

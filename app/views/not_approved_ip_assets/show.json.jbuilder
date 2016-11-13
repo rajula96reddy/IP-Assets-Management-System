@@ -1,0 +1,1 @@
+json.partial! "not_approved_ip_assets/not_approved_ip_asset", not_approved_ip_asset: @not_approved_ip_asset
