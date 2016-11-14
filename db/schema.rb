@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114031506) do
+ActiveRecord::Schema.define(version: 20161114065153) do
 
   create_table "ip_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "Research_group_ID"
@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20161114031506) do
     t.string   "Labs_Associated"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_ip_assets_on_user_id", using: :btree
+    t.integer  "owner_id"
+    t.index ["owner_id"], name: "index_ip_assets_on_owner_id", using: :btree
   end
 
   create_table "not_approved_ip_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20161114031506) do
     t.string   "Labs_Associated"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_not_approved_ip_assets_on_user_id", using: :btree
+    t.integer  "owner_id"
+    t.string   "avatar"
   end
 
   create_table "owners", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(version: 20161114031506) do
     t.boolean  "Is_stateholder"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "ip_assets_id"
+    t.integer  "user_id"
+    t.index ["ip_assets_id"], name: "index_owners_on_ip_assets_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -59,6 +62,6 @@ ActiveRecord::Schema.define(version: 20161114031506) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "ip_assets", "users"
-  add_foreign_key "not_approved_ip_assets", "users"
+  add_foreign_key "ip_assets", "owners"
+  add_foreign_key "owners", "ip_assets", column: "ip_assets_id"
 end

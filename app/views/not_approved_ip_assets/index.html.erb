@@ -21,7 +21,6 @@
         <td><%= link_to 'Show', not_approved_ip_asset %></td>
         <td><%= link_to 'Edit', edit_not_approved_ip_asset_path(not_approved_ip_asset) %></td>
         <td><%= link_to 'Approve', IpAsset.copy(not_approved_ip_asset,current_user) ,data:{ confirm: 'Are you sure?' } %></td>
-        <td><%= not_approved_ip_asset.user_id%> </td>
         <td><%= link_to 'Destroy', not_approved_ip_asset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

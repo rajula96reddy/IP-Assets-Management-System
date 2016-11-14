@@ -26,8 +26,8 @@ class NotApprovedIpAssetsController < ApplicationController
   # POST /not_approved_ip_assets.json
   def create
     @not_approved_ip_asset = NotApprovedIpAsset.new(not_approved_ip_asset_params)
-    @user=@not_approved_ip_asset.user
-    @not_approved_ip_asset.user_id=current_user.id
+    # @owner=@not_approved_ip_asset.owner
+    @not_approved_ip_asset.owner_id=current_user.id
     respond_to do |format|
       if @not_approved_ip_asset.save
         format.html { redirect_to @not_approved_ip_asset, notice: 'Not approved ip asset was successfully created.' }
