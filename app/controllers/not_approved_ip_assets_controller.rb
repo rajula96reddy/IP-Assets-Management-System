@@ -15,6 +15,7 @@ class NotApprovedIpAssetsController < ApplicationController
   # GET /not_approved_ip_assets/new
   def new
     @not_approved_ip_asset = NotApprovedIpAsset.new
+    # @not_approved_ip_asset.user_id = current_user.id
   end
 
   # GET /not_approved_ip_assets/1/edit
@@ -25,7 +26,8 @@ class NotApprovedIpAssetsController < ApplicationController
   # POST /not_approved_ip_assets.json
   def create
     @not_approved_ip_asset = NotApprovedIpAsset.new(not_approved_ip_asset_params)
-
+    @user=@not_approved_ip_asset.user
+    @not_approved_ip_asset.user_id=current_user.id
     respond_to do |format|
       if @not_approved_ip_asset.save
         format.html { redirect_to @not_approved_ip_asset, notice: 'Not approved ip asset was successfully created.' }
@@ -69,6 +71,6 @@ class NotApprovedIpAssetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def not_approved_ip_asset_params
-      params.require(:not_approved_ip_asset).permit(:Research_group_ID, :Type, :Labs_Associated)
+      params.require(:not_approved_ip_asset).permit(:Research_group_ID, :Type, :Labs_Associated,:user_id)
     end
 end

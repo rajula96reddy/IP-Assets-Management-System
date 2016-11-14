@@ -14,6 +14,7 @@ class IpAssetsController < ApplicationController
     # GET /ip_assets/new
   def new
     @ip_asset = IpAsset.new
+
   end
 
   # GET /ip_assets/1/edit
@@ -24,7 +25,8 @@ class IpAssetsController < ApplicationController
   # POST /ip_assets.json
   def create
     @ip_asset = IpAsset.new(ip_asset_params)
-
+    @user=@ip_asset.user
+    # @ip_asset.user_id=current_user.id
     respond_to do |format|
       if @ip_asset.save
         format.html { redirect_to @ip_asset, notice: 'Ip asset was successfully created.' }
@@ -68,6 +70,6 @@ class IpAssetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ip_asset_params
-      params.require(:ip_asset).permit(:Research_group_ID, :Type, :Labs_Associated)
+      params.require(:ip_asset).permit(:Research_group_ID, :Type, :Labs_Associated,:user_id)
     end
 end
