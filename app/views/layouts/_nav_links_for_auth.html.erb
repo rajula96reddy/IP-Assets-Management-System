@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+  <li><%= link_to ' Sign-Out', destroy_user_session_path, :method=>'delete', :class => "glyphicon glyphicon-log-out" %></li>
+<% else %>
+  <li><%= link_to ' Login ', new_user_session_path , {:class => "glyphicon glyphicon-log-in", 'data-toggle' => "tooltip", :title => "Hop on board!"}%></li>
+  <!-- 
+  <li><%= link_to 'Sign up', new_user_registration_path %></li> -->
+<% end %>

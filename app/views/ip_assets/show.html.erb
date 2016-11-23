@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+<div class="jumbotron abc">
+<p>
+  <strong>Title:</strong>
+  <%= @ip_asset.Title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ip_asset.Description %>
+</p>
+<p>
+<strong>Owners:</strong>
+<ol>
+<%for user in @ip_asset.users%>
+<!-- <strong>Type:</strong> -->
+<p><%=h user.name%></p>
+<% end %>
+</ol>
+</p>
+<p>
+  <strong>Labs associated:</strong>
+  <%= @ip_asset.Labs_Associated %>
+</p>
+<p>
+  <strong>Labs associated:</strong>
+  <%= link_to "Resume",@ip_asset.attachment_url %>
+</p>
+<!--<%= link_to 'Edit', edit_ip_asset_path(@ip_asset) %> |-->
+<%= link_to 'Back', ip_assets_path %>
+</div>

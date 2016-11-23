@@ -1,0 +1,61 @@
+<%= form_for(ip_asset,:multipart =>true) do |f| %>
+  <% if ip_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ip_asset.errors.count, "error") %> prohibited this ip_asset from being saved:</h2>
+
+      <ul>
+      <% ip_asset.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="jumbotron abc">
+<h3 >Add IP asset</h3>
+    <hr class="featurette-divider1">
+      <div class="container">
+  <div class="field">
+    <%= f.label :Title, class: "col-sm-2 control-label" %>
+    <%= f.text_field :Title %>
+  </div>
+    <div class="field">
+    <%= f.label :Description, class: "col-sm-2 control-label"  %>
+    <%= f.text_field :Description %>
+  </div>
+  <div class="field">
+    <%= f.label :"Is it Patented" %>
+
+     <%= f.select :Is_patented, ["true", "false"] %>
+  </div>
+    <div class="field">
+    <%= f.label :"Preference for private or public" %>
+    <%= f.select :accessibility, ["Public", "Private"] %>
+  </div>
+    <div class="field">
+    <%= f.label :"Is it Licensed" %>
+    <%= f.radio_button :Is_licensed,'true'%> Yes 
+    <%= f.radio_button :Is_licensed,'false'%> No 
+  </div>
+  <div class="field">
+<div id="ownerships">
+    <%= f.fields_for :ownerships,Ownership.new do |ownership| %>
+      <%= render 'ownership_fields', :f => ownership %>
+    
+    <div class='links'>
+      <%= link_to_add_association 'add owner', f, :ownerships%>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Document %>
+    <%= f.file_field :attachment %>
+  </div>
+
+
+  <div class="actions">
+     <%= f.submit 'add new IP asset', class: "col-sm-offset-4 col-sm-4 w3-btn w3-blue w3-hover-green" %>
+  </div>
+  </div>
+    </div>
+<% end %>

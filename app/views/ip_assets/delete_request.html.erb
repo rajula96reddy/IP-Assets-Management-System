@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+<div class="jumbotron abc">
+<h1>Ip Assets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Research group id</th>
+      <th>Type</th>
+      <th>Labs associated</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ip_assets.where("Original_id = '-2'").each do |ip_asset| %>
+      <tr>
+        <td><%= ip_asset.Research_group_ID %></td>
+        <td><%= ip_asset.Type %></td>
+        <td><%= ip_asset.Labs_Associated %></td>
+        <!-- <td><%= link_to 'Show', ip_asset %></td> -->
+        <!-- <td><%= link_to 'Edit', edit_ip_asset_path(ip_asset) %></td> -->
+        <!-- <td><%= link_to 'Destroy', ip_asset, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        </td>-->
+         <td><%= link_to "Approve Delete ",:controller=>"ip_assets",:action=>"set_delete",:ip_asset=>ip_asset%></td>
+    <td><%= link_to "Reject Deletion ",:controller=>"ip_assets",:action=>"set_not_delete",:ip_asset=>ip_asset%><td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ip Asset', new_ip_asset_path %>
+</div>

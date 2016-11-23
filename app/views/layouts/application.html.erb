@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "IP Assets Management System" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Rails Devise Roles" %>">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+  </head>
+
+
+  <body>
+    <!-- <header> -->
+    <div class="navbar-wrapper">
+      <%= render 'layouts/navigation' %>
+    </div>
+    <!-- </header> -->
+    <main role="main">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+     </main> 
+
+      <hr class="featurette-divider1">
+      <footer>
+        
+        <p>&copy; 2016 IPAMS &middot; <span class="glyphicon glyphicon-lock">All-rights-reserved</span> &middot; <a href="contact.html"><span class="glyphicon glyphicon-home">Go-to-home-page</span></a> &middot; <a href="aboutThisSite.html"><span class="glyphicon glyphicon-info-sign">About-this-site</span></a>
+        <a href="#"><span class="pull-right glyphicon glyphicon-upload">Back-to-top</span></a>
+        </p>
+      </footer>
+  </body>
+</html>

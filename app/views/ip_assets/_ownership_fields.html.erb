@@ -1,0 +1,10 @@
+<li class="control-group nested-fields">
+  <div class="field">
+     <%=f.collection_select(:user_id,User.all,:id,:name)%>
+        <%= f.label :stakeholding_percentage, "Stakeholding Percentage:" %>
+    <%= f.text_field :stakeholding_percentage %>
+
+       
+  </div>
+    <%= link_to_remove_association "remove", f %>
+</li>

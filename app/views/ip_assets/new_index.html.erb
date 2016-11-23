@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+         
+            <h5>SEARCH:</h5>
+<%= form_tag(ip_assets_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search keywords" %>
+<%= select_tag :search_column, options_for_select(IpAsset.column_names, params[:search_column]), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= select_tag :search_column4, options_for_select(['Display all results','1','5','10','100']), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= submit_tag "Search", class:"btn btn-warning" %>
+<% end %>
+          <hr class="featurette-divider1">
+         
+           <h5>FILTER:</h5>
+<%= form_tag(ip_assets_path, :method => "get", id: "filter-form") do %>
+<%= select_tag :search_column3, options_for_select(IpAsset.column_names, params[:search_column3]), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= select_tag :search_column2, options_for_select(['ASCENDING ORDER','DESCENDING ORDER']), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= select_tag :search_column4, options_for_select(['Display all results','1','5','10','100']), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= submit_tag "Filter", class:"btn btn-warning" %>
+<% end %>
+          
+         <hr class="featurette-divider1">
+            <h5>DISPLAY:</h5>
+<%= form_tag(ip_assets_path, :method => "get", id: "display-form") do %>
+<%= select_tag :search_column5, options_for_select(['Display all IP-assets','1','5','10','100']), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= submit_tag "Display", class:"btn btn-warning" %>
+<% end %>
+          
+        </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 jumbotron abc">
+          <h2 >View IP assets</h2>
+           <hr class="featurette-divider1">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>4</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @ip_assets.present? %>
+    <% @ip_assets.each do |ip_asset| %>
+      <tr>
+        <td><%= ip_asset.Research_group_ID %></td>
+        <td><%= ip_asset.Type %></td>
+        <td><%= ip_asset.Labs_Associated %></td>
+        <td><%= link_to 'Show', ip_asset %></td>
+        <td><%= link_to 'Edit', edit_ip_asset_path(ip_asset) %></td>
+        <td><%= link_to 'Destroy', ip_asset, method: :delete, data: { confirm: 'Are you sure?' } %>
+         
+        </td>
+      </tr>
+    <% end %>
+    <% else %>
+  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<%= link_to 'New Ip Asset', new_ip_asset_path, class: "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2"%>

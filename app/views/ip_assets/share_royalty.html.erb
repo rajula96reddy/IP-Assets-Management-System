@@ -1,0 +1,8 @@
+<%= form_for(ip_asset,:multipart =>true) do |f| %>
+<div class="field">
+    <textarea></textarea>
+    <!-- <td><% form_for(ip_asset) do |f|%> -->
+    <%=f.label :"Royalty"%>
+    <%= f.text_field :Total_royalty %>
+    <%= f.submit 'Add',class: "col-sm-offset-4 col-sm-4 w3-btn w3-blue w3-hover-green"%>
+<% end %></td></div>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+<div class="jumbotron abc">
+<p>
+  <strong>User:</strong>
+  <%= @ownership.user_id %>
+</p>
+
+<p>
+  <strong>Ip asset:</strong>
+  <%= @ownership.ip_asset_id %>
+</p>
+
+<%= link_to 'Edit', edit_ownership_path(@ownership) %> |
+<%= link_to 'Back', ownerships_path %>
+</div>

@@ -1,0 +1,77 @@
+<%= form_for(ip_asset,:multipart =>true) do |f| %>
+  <% if ip_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ip_asset.errors.count, "error") %> prohibited this ip_asset from being saved:</h2>
+
+      <ul>
+      <% ip_asset.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="jumbotron abc">
+<h3 >Add IP asset</h3>
+    <hr class="featurette-divider1">
+      <div class="container">
+  <div class="field">
+    <%= f.label :Title%>
+    <%= f.text_field :Title %>
+  </div>
+    <div class="field">
+    <%= f.label :Description %>
+    <%= f.text_field :Description %>
+  </div>
+  <div class="field">
+    <%= f.label :Document %>
+    <%= f.file_field :attachment %>
+  </div>
+    <div class="field">
+    <%= f.label :"Is it Patented" %>
+
+<!--      <%= f.radio_button :Is_patented,'Yes'%> Yes 
+     <%= f.radio_button :Is_patented,'No'%> No  -->
+     <%= f.select :Is_patented, ["true", "false"] %>
+<!--      <%= radio_button("ip_asset", "Is_patented", "true")%>Yes
+       <%= radio_button("ip_asset", "Is_patented", "false")%>No  -->
+  </div>
+    <div class="field">
+    <%= f.label :"Is it Licensed" %>
+    <%= f.radio_button :Is_licensed,'true'%> Yes 
+    <%= f.radio_button :Is_licensed,'false'%> No 
+<!--     <%= radio_button("ip_asset", "Is_patented", "1")%>
+       <%= radio_button("ip_asset", "Is_patented", "0")%> -->
+  </div>
+
+<!-- <script type="text/javascript">
+    $(function(){
+        if ($('#ip_asset_Is_patented').val() != 'true')
+            $('#ip_asset_Research_group_ID').hide();
+    });
+</script> -->
+  <div class="field">
+
+<%= f.collection_select :user_id, User.order(:name),:id,:name, include_blank: true %>
+<%=f.collection_select(:user_id, .all, :id, :name)%>
+  </div>
+  <div class="field" id="a">
+    <%= f.label :Research_group_ID %>
+    <%= f.number_field :Research_group_ID %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Type %>
+    <%= f.text_field :Type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Labs_Associated %>
+    <%= f.text_field :Labs_Associated %>
+  </div>  
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
+</div>

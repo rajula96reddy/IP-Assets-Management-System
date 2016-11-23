@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+<div class="jumbotron abc">
+<h1>Ip Assets</h1>
+
+<table style="display: inline-block;">
+  <p>Original</p>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>ID</th>
+      <th>Attachment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ip_assets.where("Original_id = '-1'").each do |ip_asset| %>
+      <tr>
+        <td><%= ip_asset.Title %></td>
+        <td><%= ip_asset.id %></td>
+        <td><%= ip_asset.attachment %></td>
+        <td><%= link_to 'Show', ip_asset %></td>
+        <!-- <td><%= link_to 'Edit', edit_ip_asset_path(ip_asset) %></td> -->
+        <!-- <td><%= link_to 'Destroy', ip_asset, method: :delete, data: { confirm: 'Are you sure?' } %> -->
+        </td>
+    <td><%= link_to "Approve Edit ",:controller=>"ip_assets",:action=>"set_edit",:ip_asset=>ip_asset%></td>
+    <td><%= link_to "Reject Edit ",:controller=>"ip_assets",:action=>"set_not_edit",:ip_asset=>ip_asset%><td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+  <table style="float: right;">
+<thead>
+    <tr>
+      <th>Title</th>
+      <th>ID</th>
+      <th>Attachment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+    <tbody>
+    <% @ip_assets.where("Original_id > 0").where.not( "status = 'Approved'").each do |ip_asset| %>
+      <tr>
+        <td><%= ip_asset.Title %></td>
+        <td><%= ip_asset.id %></td>
+        <td><%= ip_asset.attachment %></td>
+         <td><%= link_to 'Show', ip_asset %></td>
+        <!--<td><%= link_to 'Edit', edit_ip_asset_path(ip_asset) %></td>
+        <td><%= link_to 'Destroy', ip_asset, method: :delete, data: { confirm: 'Are you sure?' } %> --> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ip Asset', new_ip_asset_path %>  </div>
