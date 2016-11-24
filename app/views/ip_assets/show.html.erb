@@ -23,9 +23,13 @@
   <%= @ip_asset.Labs_Associated %>
 </p>
 <p>
-  <strong>Labs associated:</strong>
+  <strong>Document:</strong>
   <%= link_to "Resume",@ip_asset.attachment_url %>
 </p>
 <!--<%= link_to 'Edit', edit_ip_asset_path(@ip_asset) %> |-->
-<%= link_to 'Back', ip_assets_path %>
+<% if user_signed_in?%> 
+<%= link_to 'Back',my_index_ip_assets_path, :class => "btn btn-primary"%>
+ <%else%>
+ <%= link_to 'Back',all_index_ip_assets_path, :class => "btn btn-primary"%>
+ <%end%> 
 </div>

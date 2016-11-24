@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many:ownerships
   has_many:posts
   has_many:ip_assets,:through=>:ownerships
+  has_many:notifications
   def set_default_role
     self.role ||= :user
   end

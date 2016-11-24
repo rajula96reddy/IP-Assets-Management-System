@@ -7,6 +7,10 @@ class IpAssetsController < ApplicationController
 
     @ip_assets = IpAsset.where("status ='Not_approved'").all
   end
+  def all_index
+
+    @ip_assets = IpAsset.where("status ='Approved'").all
+  end
    def my_index
     # a=current_user.id
     @ip_assets = IpAsset.includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved").all
@@ -34,7 +38,7 @@ class IpAssetsController < ApplicationController
       @ip_assets = IpAsset.all.where("status ='Approved'")
     end
     end
-    
+    # redirect_to new_index_ip_assets_path
   end
   def edit_request
     @ip_assets = IpAsset.all
@@ -104,8 +108,11 @@ class IpAssetsController < ApplicationController
     @ip_asset = IpAsset.find(params[:ip_asset])
     @ip_asset.status='Approved'
     @ip_asset.save
-    @ownership=Ownership.create(:ip_asset_id=> @ip_asset.id,:user_id=>@ip_asset.user_id)
-    
+    # @ownership=Ownership.create(:ip_asset_id=> @ip_asset.id,:user_id=>@ip_asset.user_id)
+    @owners=Ownership.where(:ip_asset_id=>params[:ip_asset])
+    @owners.each do |owner|
+    @notification = Notification.create(:user_id=>owner.user_id,:content=>  @ip_asset_Title" Your IP Asset:{@ip_asset.Title} has been approved")
+    end
     redirect_to @ip_asset
     
   end

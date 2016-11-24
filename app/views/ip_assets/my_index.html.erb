@@ -35,28 +35,26 @@
           <h2 >View IP assets</h2>
            <hr class="featurette-divider1">
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>4</th>
+                  <th>Title</th>
+                  <th>Decription</th>
+                  <th>Show Full Information</th>
+                  <th>Edit IP asset</th>
+                  <th>Delete IP asset</th>
                 </tr>
               </thead>
               <tbody>
                   <% if @ip_assets.present? %>
     <% @ip_assets.each do |asset| %>
       <tr>
-        <td><%= asset.Research_group_ID %></td>
-        <td><%= asset.Type %></td>
-        <td><%= asset.Labs_Associated %></td>
-        <td><%= link_to 'Show', asset %></td>
-        <td><%= link_to 'Edit', edit_ip_asset_path(asset) %></td>
-        <td><%= link_to 'Destroy', asset, method: :delete, data: { confirm: 'Are you sure?' } %>
-         <td><%= link_to "Give royalty",:controller=>"ip_assets",:action=>"share_royalty",:ip_asset=>asset%></td>
+        <td><%= asset.Title %></td>
+        <td><%= asset.Description %></td>
+        <td><%= link_to 'Show', asset, {:style => "text-decoration:none;"} %></td>
+        <td><%= link_to 'Edit', edit_ip_asset_path(asset), {:style => "text-decoration:none;"} %></td>
+        <td><%= link_to 'Destroy', asset, {method: :delete, data: { confirm: 'Are you sure?' }, :style => "text-decoration:none;"} %>
+         <!-- <td><%= link_to "Give royalty",{:controller=>"ip_assets",:action=>"share_royalty",:ip_asset=>asset, :style => "color:none;background-color: transparent;"}%></td> -->
         </td>
       </tr>
     <% end %>

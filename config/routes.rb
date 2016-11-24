@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :contact_us
+  resources :notifications
   get 'resumes/index'
 
   get 'resumes/new'
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
       get:'set_delete'
       get:'set_not_edit'
       get:'set_not_delete'
+      get:'all_index'
     end
   end
   root to: 'visitors#index'

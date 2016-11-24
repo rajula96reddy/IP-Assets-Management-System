@@ -35,14 +35,12 @@
           <h2 >View IP assets</h2>
            <hr class="featurette-divider1">
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table ">
               <thead>
                 <tr>
                   <th>Title</th>
                   <th>Decription</th>
-                  <th>Show Option</th>
-                  <th>Edit Option</th>
-                  <th>Destroy Option</th>
+                  <th>Show Full Information</th>
                 </tr>
               </thead>
               <tbody>
@@ -50,11 +48,8 @@
     <% @ip_assets.each do |ip_asset| %>
       <tr>
         <td><%= ip_asset.Title %></td>
-        <td><%= ip_asset.Decription %></td>
-        <td><%= link_to 'Show', ip_asset %></td>
-        <td><%= link_to 'Edit', edit_ip_asset_path(ip_asset) %></td>
-        <td><%= link_to 'Destroy', ip_asset, method: :delete, data: { confirm: 'Are you sure?' } %>
-         
+        <td><%= ip_asset.Description %></td>
+          <td><%= link_to 'Show', ip_asset , {:style => "text-decoration:none;"}%></td>
         </td>
       </tr>
     <% end %>
@@ -70,4 +65,4 @@
     </div>
 
 
-<%= link_to 'New Ip Asset', new_ip_asset_path, class: "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2"%>
+<%= link_to 'Back', root_path, class: "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2"%>
