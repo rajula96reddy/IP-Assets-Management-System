@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<div class="jumbotron abc">
+<div class="container">
+     <hr class="featurette-divider1">
 <p>
   <strong>Name:</strong>
   <%= @contact_u.name %>
@@ -20,5 +22,7 @@
   <%= @contact_u.Tell_us_more_about_you %>
 </p>
 
-<%= link_to 'Back', root_path %>
+<%= link_to 'Back', root_path,class: "btn btn-primary" %>
+</div>
+</div>
 <!--<%= link_to 'Edit', edit_contact_u_path(@contact_u) %> |

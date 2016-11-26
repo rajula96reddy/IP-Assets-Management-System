@@ -26,6 +26,12 @@
   <strong>Document:</strong>
   <%= link_to "Resume",@ip_asset.attachment_url %>
 </p>
+<p>
+<% if @ip_asset.status=="Approved" %>
+  <strong>Approved By:</strong>
+  <%= @ip_asset.Approver_name %>
+<%end%>
+</p>
 <!--<%= link_to 'Edit', edit_ip_asset_path(@ip_asset) %> |-->
 <% if user_signed_in?%> 
 <%= link_to 'Back',my_index_ip_assets_path, :class => "btn btn-primary"%>

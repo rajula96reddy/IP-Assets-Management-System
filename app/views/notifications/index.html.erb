@@ -1,8 +1,14 @@
 <p id="notice"><%= notice %></p>
+<div class="jumbotron abc">
+<div class="container">
+  <div class="row">
+    <h2>Notifications</h2>
+     <hr class="featurette-divider1">
+    <div class="column">
 
-<h1>Notifications</h1>
 
-<table>
+
+<table class="table">
   <thead>
     <tr>
   <!--     <th>User</th>
@@ -23,7 +29,9 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
+<%= link_to 'Back', roots_path, class: "btn btn-primary"%>
+</div>
+</div>
+</div>
+</div>
 <!--<%= link_to 'New Notification', new_notification_path %>

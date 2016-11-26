@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<div class="jumbotron abc">
+<div class="container">
+     <hr class="featurette-divider1">
 <p>
   <strong>User:</strong>
   <%= @notification.user_id %>
@@ -10,5 +12,7 @@
   <%= @notification.content %>
 </p>
 
-<%= link_to 'Edit', edit_notification_path(@notification) %> |
-<%= link_to 'Back', notifications_path %>
+<%= link_to 'Edit', edit_notification_path(@notification),class: "btn btn-primary" %> |
+<%= link_to 'Back', notifications_path,class: "btn btn-primary" %>
+</div>
+</div>

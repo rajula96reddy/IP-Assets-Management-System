@@ -1,37 +1,83 @@
  <p id="notice"><%= notice %></p>
-<div class="jumbotron abc">
-<h1>Ip Assets</h1>
 
-<table>
-  <thead>
-    <tr>
-       <th>Title</th>
-        <th>Decription</th>
-        <th>Show Full Information</th>
-      
-    </tr>
-  </thead>
+    <div class="container-fluid">
 
-  <tbody>
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+         
+            <h5>SEARCH:</h5>
+<%= form_tag(ip_assets_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search keywords" %>
+<%= select_tag :search_column, options_for_select(IpAsset.column_names, params[:search_column]), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= select_tag :search_column4, options_for_select(['Display all results','1','5','10','100']), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= submit_tag "Search", class:"btn btn-warning" %>
+<% end %>
+          <hr class="featurette-divider1">
+         
+           <h5>FILTER:</h5>
+<%= form_tag(ip_assets_path, :method => "get", id: "filter-form") do %>
+<%= select_tag :search_column3, options_for_select(IpAsset.column_names, params[:search_column3]), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= select_tag :search_column2, options_for_select(['ASCENDING ORDER','DESCENDING ORDER']), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= select_tag :search_column4, options_for_select(['Display all results','1','5','10','100']), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= submit_tag "Filter", class:"btn btn-warning" %>
+<% end %>
+          
+         <hr class="featurette-divider1">
+            <h5>DISPLAY:</h5>
+<%= form_tag(ip_assets_path, :method => "get", id: "display-form") do %>
+<%= select_tag :search_column5, options_for_select(['Display all IP-assets','1','5','10','100']), {class:"btn btn-primary dropdown-toggle", type:"button", 'data-toggle':"dropdown"} %>
+<%= submit_tag "Display", class:"btn btn-warning" %>
+<% end %>
+          
+        </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 jumbotron abc">
+          <h2 >View IP assets</h2>
+           <hr class="featurette-divider1">
+          <div class="table-responsive">
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Decription</th>
+                  <th>Show Full Information</th>
+                  <% if current_user.try(:ip_committee?) %>
+    <th>Approve</th>
+    <th>Approve Edit</th>
+    <th>Reject Edit</th>
+    <!-- <th>Add Royalty</th> -->
+    
+   <% end %>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @ip_assets.present? %>
     <% @ip_assets.each do |ip_asset| %>
       <tr>
         <td><%= ip_asset.Title %></td>
         <td><%= ip_asset.Description %></td>
           <td><%= link_to 'Show', ip_asset , {:style => "text-decoration:none;"}%></td>
-        <!-- ip_asset, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-    <% if current_user.try(:ip_committee?) %>
+          <% if current_user.try(:ip_committee?) %>
     <td><%= link_to "Approve ",:controller=>"ip_assets",:action=>"set_approved",:ip_asset=>ip_asset%></td>
     <td><%= link_to "Approve Edit ",:controller=>"ip_assets",:action=>"set_edit",:ip_asset=>ip_asset%></td>
     <td><%= link_to "Reject Edit ",:controller=>"ip_assets",:action=>"set_not_edit",:ip_asset=>ip_asset%></td>
-    <td><%= link_to "Give royalty",:controller=>"ip_assets",:action=>"share_royalty",:ip_asset=>ip_asset%></td>
+    <!-- <td><%= link_to "Give royalty",:controller=>"ip_assets",:action=>"share_royalty",:ip_asset=>ip_asset%></td> -->
    <% end %>
         
       </tr>
     <% end %>
-  </tbody>
-</table>
+    <% else %>
+  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+               
+              </tbody>
+            </table>
+          
 
-<br>
 
-<%= link_to 'New Ip Asset', new_ip_asset_path %>
+<%= link_to 'Back', root_path, class: "btn btn-primary"%>
 </div>
+</div>
+</div>
+</div>
+

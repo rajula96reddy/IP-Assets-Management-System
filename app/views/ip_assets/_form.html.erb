@@ -31,11 +31,11 @@
     <%= f.label :"Preference for private or public:" %>
     <%= f.select :accessibility, ["Public", "Private"] %>
   </div>
-    <div class="field">
+  <!--   <div class="field">
     <%= f.label :"Is it Licensed?" %>
     <%= f.radio_button :Is_licensed,'true'%> Yes 
     <%= f.radio_button :Is_licensed,'false'%> No 
-  </div>
+  </div> -->
   <div class="field">
 <div id="ownerships">
     <%= f.fields_for :ownerships,Ownership.new do |ownership| %>

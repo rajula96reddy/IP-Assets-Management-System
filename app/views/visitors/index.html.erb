@@ -3,7 +3,7 @@
   <% if current_user.try(:admin?) %>
   <div class="jumbotron abc">
       <div class="container">
-        <h2 style="text-align: center;">Hello, <%=current_user.role%>!</h2>
+        <h2 style="text-align: center;">Hello, Admin!</h2>
         
       </div>
     </div>
@@ -30,12 +30,19 @@
           
          
 </div>
+<div class="w3-col w3-hover-shadow box1 w3-margin-top w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to 'View New Contacts', contact_us_path, {:style => "text-decoration:none;color:none;background-color: transparent;"} %></h3>
+          
+          
+         
+</div>
  </div>
   <% else %>
       <% if current_user.try(:ip_committee?)%>
       <div class="jumbotron abc">
       <div class="container">
-        <h2 style="text-align: center;">Hello, <%=current_user.role%>!</h2>
+        <h2 style="text-align: center;">Hello, IP committee member!</h2>
         
       </div>
     </div>

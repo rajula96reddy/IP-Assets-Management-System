@@ -5,17 +5,72 @@ class IpAssetsController < ApplicationController
   # GET /ip_assets.json
   def index
 
-    @ip_assets = IpAsset.where("status ='Not_approved'").all
+   
+    
+   
+    if params[:search]
+      @ip_assets = IpAsset.search(params[:search], params[:search_column],params[:search_column4])
+    else
+      @ip_assets = IpAsset.all.order('created_at ASC')
+    end
+     if params[:search_column3]
+      @ip_assets=IpAsset.search1(params[:search_column3], params[:search_column2],params[:search_column4])
+    end
+    if params[:search_column5]
+      if(params[:search_column5]!='Display all IP-assets' && params[:search_column5]!='SELECT NUMBER OF IP ASSETS TO BE DISPLAYED')
+      @ip_assets=IpAsset.all.first(params[:search_column5].to_i)
+    else
+      
+      @ip_assets = IpAsset.all
+    end
+    end
+    
+   
+    
   end
   def all_index
 
-    @ip_assets = IpAsset.where("status ='Approved'").all
+      @ip_assets = IpAsset.where("status ='Approved'").all
+    
+   
+    if params[:search]
+      @ip_assets = IpAsset.search(params[:search], params[:search_column],params[:search_column4]).where("status ='Approved'")
+    else
+      @ip_assets = IpAsset.all.order('created_at ASC').where("status ='Approved'")
+    end
+     if params[:search_column3]
+      @ip_assets=IpAsset.search1(params[:search_column3], params[:search_column2],params[:search_column4]).where("status ='Approved'")
+    end
+    if params[:search_column5]
+      if(params[:search_column5]!='Display all IP-assets' && params[:search_column5]!='SELECT NUMBER OF IP ASSETS TO BE DISPLAYED')
+      @ip_assets=IpAsset.all.first(params[:search_column5].to_i).where("status ='Approved'")
+    else
+      
+      @ip_assets = IpAsset.all.where("status ='Approved'")
+    end
+    end
   end
    def my_index
-    # a=current_user.id
     @ip_assets = IpAsset.includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved").all
-    # @ip_assets = Ownership.find_by_id(id: IpAsset.where(id:current_user.id)).all
-      # (:ip_asset).where(user_id: current_user.id,status: "Approved").all
+    
+   
+    if params[:search]
+      @ip_assets = IpAsset.search(params[:search], params[:search_column],params[:search_column4]).includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved")
+    else
+      @ip_assets = IpAsset.all.order('created_at ASC').includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved")
+    end
+     if params[:search_column3]
+      @ip_assets=IpAsset.search1(params[:search_column3], params[:search_column2],params[:search_column4]).includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved")
+    end
+    if params[:search_column5]
+      if(params[:search_column5]!='Display all IP-assets' && params[:search_column5]!='SELECT NUMBER OF IP ASSETS TO BE DISPLAYED')
+      @ip_assets=IpAsset.all.first(params[:search_column5].to_i).includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved")
+    else
+      
+      @ip_assets = IpAsset.all.includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved")
+    end
+    end
+    # redirect_to new_index_ip_assets_path
   end
   def new_index
     @ip_assets = IpAsset.where("status ='Approved'").all
@@ -43,7 +98,17 @@ class IpAssetsController < ApplicationController
   def edit_request
     @ip_assets = IpAsset.all
   end
+ # def validating_sum
 
+ #    @owner=IpAsset.find(params[:ip_asset]).ownerships
+ #    if(@owner.empty?)
+ #        sum =0
+ #        a = @owner.sum(:stakeholding_percentage)
+ #        errors.add(:ip_asset, "some error")
+ #        # @owner.each do |owne|
+ #        #   sum = sum +
+ #      end
+ #    end
   def delete_request
       @ip_assets = IpAsset.all
   end
@@ -107,11 +172,13 @@ class IpAssetsController < ApplicationController
   def set_approved
     @ip_asset = IpAsset.find(params[:ip_asset])
     @ip_asset.status='Approved'
+    @ip_asset.Approval_id=current_user.id
+    @ip_asset.Approver_name = (User.find_by id: current_user.id).name
     @ip_asset.save
     # @ownership=Ownership.create(:ip_asset_id=> @ip_asset.id,:user_id=>@ip_asset.user_id)
     @owners=Ownership.where(:ip_asset_id=>params[:ip_asset])
     @owners.each do |owner|
-    @notification = Notification.create(:user_id=>owner.user_id,:content=>  @ip_asset_Title" Your IP Asset:{@ip_asset.Title} has been approved")
+    @notification = Notification.create(:user_id=>owner.user_id,:content=>  " Your IP Asset:{@ip_asset.Title} has been approved")
     end
     redirect_to @ip_asset
     
@@ -152,6 +219,7 @@ class IpAssetsController < ApplicationController
     redirect_to @ip_asset
     
   end 
+  
   # POST /ip_assets
   # POST /ip_assets.json
   def create
@@ -159,9 +227,17 @@ class IpAssetsController < ApplicationController
     @ip_asset.status='Not_approved'
     @ip_asset.user_id=current_user.id
     respond_to do |format|
+    # validating_sum
       if @ip_asset.save
+      # sum=0 
+        # Ownership.where(:ip_asset_id=>@ip_asset_id).select("stakeholding_percentage").inject(0) {|sum, i|  sum + i }
+        # inject(0){|sum,e| sum + e.stakeholding_percentage}
+        # if(sum==100)
+        # p sum
         format.html { redirect_to @ip_asset, notice: 'Ip asset was successfully created.' }
         format.json { render :show, status: :created, location: @ip_asset }
+      
+
       else
         format.html { render :new }
         format.json { render json: @ip_asset.errors, status: :unprocessable_entity }

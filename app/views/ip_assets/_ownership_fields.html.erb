@@ -1,6 +1,11 @@
 <li class="control-group nested-fields">
   <div class="field">
-  <%= f.label "Other stakeholders" %>
+
+  <%= f.label "Other owners" %>
+     <!-- <%=f.text_field:user_id ,{:value=>'1',:readonly=>true, :placeholder=>"IIITB"}%> 
+     <%=f.collection_select(:user_id,User.all,:id,:name,{:selected_value => '1'},:disabled => "disabled")%>
+        <%= f.label :stakeholding_percentage, "Stakeholding Percentage" %>
+    <%= f.number_field :stakeholding_percentage,min: 20%></br>-->
      <%=f.collection_select(:user_id,User.all,:id,:name)%>
         <%= f.label :stakeholding_percentage, "Stakeholding Percentage" %>
     <%= f.text_field :stakeholding_percentage %>
