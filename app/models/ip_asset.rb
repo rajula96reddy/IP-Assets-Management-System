@@ -18,6 +18,7 @@ class IpAsset < ApplicationRecord
   validates_presence_of :Title,:Description,:attachment
 validate :sum_100
 validate :Is_IIITB
+validate :IIITB_stake
 def Is_IIITB
   if self.ownerships.present?
   @o=self.ownerships
@@ -28,29 +29,43 @@ def Is_IIITB
     # @a=@o.select{|o| o.user_id =='6'}
     # p @a.any?
     if !(@o.select{|o| o.user_id ==6}).any?
-    # @o.each do |o|
-      # @a=o.where(:user_id=>6)
-      # p o.user_id
-      # @a=o
-      # if o.user_id == 6
         errors.add(:ip_asset, "IIITB must be one of the owners")
-        # p "fuck"
-      # end
-      # p @a
-      # p @a.present?
     end
-      # if (@a.present?)
-     # end 
-  # if @o.where(:user_id=>'6').all?
-    # end
+   end
   end
-  # , :reject_if => lambda { |a| a[:content].blank?}
+end
+def IIITB_stake
+  if self.ownerships.present?
+  @o=self.ownerships
+  if @o.present?
+    if (@o.select{|o| o.user_id ==6}).any?
+        @a=(@o.select{|o| o.user_id ==6}) 
+        p @o
+        p 'AA'
+        # p @a.select{}
+        # p @a[0].stakeholding_percentage
+        # [:stakeholding_percentage]
+        # p @o.select{|o| o.user_id ==6}.stakeholding_percentage
+        p self.Is_funded_by_colege
+        # errors.add(:ip_asset, "IIITB must be one of the owner")
+        if(self.Is_funded_by_colege == true)
+          p "in if condition 1"
+          if(@a[0].stakeholding_percentage<50)
+            errors.add(:ip_asset, "IIITB stakeholding percentage must be greater than equal to 50")
+            # exit
+          end
+        end
+        if(self.Is_funded_by_colege == false)
+          if(@a[0].stakeholding_percentage<20)
+            errors.add(:ip_asset, "IIITB stakeholding percentage must be greater than equal to 20")
+          end
+        end
+
+        # errors.add(:ip_asset, "IIITB must be one of the owners")
+    end
+   end
   end
-  end
-  # accepts_nested_attributes_for :users, :reject_if => lambda { |a| a[:content].blank?}
-  # scope :not_approved, :conditions => {:status => 0}
-# scope :not_approved, ->  { where (status: 0) } 
- 
+end
  # def validating_sum
 
  #    if(IpAsset.first.ownerships.all?)
@@ -62,16 +77,31 @@ def Is_IIITB
  #        #   sum = sum +
  #      end
  #    end
-  def self.search(keyword, column_name,num)
-    if self.column_names.include?(column_name.to_s)
+  def self.search(keyword, num)
        if(num=='Display all results' || num=='SELECT NUMBER OF RESULTS TO BE DISPLAYED')
-      where("#{column_name} LIKE ?", "%#{keyword}%")
+        key = "%#{keyword}%"
+columns = %w{Approver_name Approval_id Title Description user_id Type}
+where(
+  columns
+    .map {|c| "#{c} like :search" }
+    .join(' OR '),
+  search: key
+)
+      # where("LIKE ?", "%#{keyword}%")
     else
-      where("#{column_name} LIKE ?", "%#{keyword}%").first(num.to_i)
+      key = "%#{keyword}%"
+columns = %w{Approver_name Approval_id Title Description user_id Type}
+where(
+  columns
+    .map {|c| "#{c} like :search" }
+    .join(' OR '),
+  search: key
+).first(num.to_i)
+      # where("LIKE ?", "%#{keyword}%").first(num.to_i)
     end
       
     
-    end
+    
   end
   def self.search1(value1, value,num)
       if IpAsset.column_names.include?(value1)

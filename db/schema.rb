@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124082955) do
+ActiveRecord::Schema.define(version: 20161130140332) do
 
   create_table "contact_us", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(version: 20161124082955) do
   create_table "ip_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "Research_group_ID"
     t.string   "Type"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.integer  "user_id"
     t.string   "attachment"
-    t.decimal  "Total_royalty",                   precision: 10
-    t.text     "Title",             limit: 65535
-    t.text     "Description",       limit: 65535
+    t.decimal  "Total_royalty",                     precision: 10
+    t.text     "Title",               limit: 65535
+    t.text     "Description",         limit: 65535
     t.boolean  "Is_patented"
     t.boolean  "Is_licensed"
     t.string   "Labs_Associated"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20161124082955) do
     t.integer  "Original_id"
     t.integer  "Approval_id"
     t.string   "Approver_name"
+    t.boolean  "Is_funded_by_colege"
   end
 
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

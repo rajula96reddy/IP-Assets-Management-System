@@ -4,12 +4,12 @@ class IpAssetsController < ApplicationController
   # GET /ip_assets
   # GET /ip_assets.json
   def index
-
+    # @ip_assets = IpAsset.where("status ='Not_approved'").all
    
     
    
     if params[:search]
-      @ip_assets = IpAsset.search(params[:search], params[:search_column],params[:search_column4])
+      @ip_assets = IpAsset.search(params[:search], params[:search_column4])
     else
       @ip_assets = IpAsset.all.order('created_at ASC')
     end
@@ -34,7 +34,7 @@ class IpAssetsController < ApplicationController
     
    
     if params[:search]
-      @ip_assets = IpAsset.search(params[:search], params[:search_column],params[:search_column4]).where("status ='Approved'")
+      @ip_assets = IpAsset.search(params[:search], params[:search_column4]).where("status ='Approved'")
     else
       @ip_assets = IpAsset.all.order('created_at ASC').where("status ='Approved'")
     end
@@ -55,7 +55,7 @@ class IpAssetsController < ApplicationController
     
    
     if params[:search]
-      @ip_assets = IpAsset.search(params[:search], params[:search_column],params[:search_column4]).includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved")
+      @ip_assets = IpAsset.search(params[:search], params[:search_column4]).includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved")
     else
       @ip_assets = IpAsset.all.order('created_at ASC').includes(:ownerships).where("user_id"=>current_user.id,"status" => "Approved")
     end
@@ -78,7 +78,7 @@ class IpAssetsController < ApplicationController
    
     if params[:search]
       value=
-      @ip_assets = IpAsset.search(params[:search], params[:search_column],params[:search_column4]).where("status ='Approved'")
+      @ip_assets = IpAsset.search(params[:search], params[:search_column4]).where("status ='Approved'")
     else
       @ip_assets = IpAsset.all.order('created_at ASC').where("status ='Approved'")
     end
@@ -171,6 +171,20 @@ class IpAssetsController < ApplicationController
   end
   def set_approved
     @ip_asset = IpAsset.find(params[:ip_asset])
+    a=0
+    p "Current Use"
+      p current_user.id
+    @ip_asset.ownerships.each do |owner|
+      p "Looping user"
+      p owner.user_id
+      if(owner.user_id==current_user.id)
+        p "in loop"
+        # @ip_asset.errors.add(:status,message:"Cant Approve")
+        redirect_to ip_assets_url, :flash=>{:error => "\t You cant approve"}
+        # break
+        return
+      end
+    end
     @ip_asset.status='Approved'
     @ip_asset.Approval_id=current_user.id
     @ip_asset.Approver_name = (User.find_by id: current_user.id).name
@@ -178,7 +192,7 @@ class IpAssetsController < ApplicationController
     # @ownership=Ownership.create(:ip_asset_id=> @ip_asset.id,:user_id=>@ip_asset.user_id)
     @owners=Ownership.where(:ip_asset_id=>params[:ip_asset])
     @owners.each do |owner|
-    @notification = Notification.create(:user_id=>owner.user_id,:content=>  " Your IP Asset:{@ip_asset.Title} has been approved")
+    @notification = Notification.create(:user_id=>owner.user_id,:content=>  " Your IP Asset:{@ip_asset.Description} has been approved")
     end
     redirect_to @ip_asset
     
@@ -313,7 +327,7 @@ class IpAssetsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ip_asset_params
       params.require(:ip_asset).permit(:Research_group_ID, :Type, :Labs_Associated,:Title,:user_id,
-        :attachment,:Is_patented,:Is_licensed,:Original_id,:Description,:Total_royalty,
+        :attachment,:Is_patented,:Is_licensed,:Original_id,:Description,:Total_royalty,:Is_funded_by_colege,
         :accessibility,ownerships_attributes: [:id,:content, :user_id, :ip_asset_id,:stakeholding_percentage,:_destroy] ,
         users_attributes: [:id,:user_id,:_destroy])
     end

@@ -31,6 +31,11 @@
     <%= f.label :"Preference for private or public:" %>
     <%= f.select :accessibility, ["Public", "Private"] %>
   </div>
+  <div class="field">
+    <%= f.label :"Is this funded by college?" %>
+
+     <%= f.select :Is_funded_by_colege, ["true", "false"] %>
+  </div>
   <!--   <div class="field">
     <%= f.label :"Is it Licensed?" %>
     <%= f.radio_button :Is_licensed,'true'%> Yes 
