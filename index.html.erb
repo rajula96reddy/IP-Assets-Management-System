@@ -1,0 +1,232 @@
+ 
+<% if user_signed_in? %>
+  <% if current_user.try(:admin?) %>
+  <div class="jumbotron abc">
+      <div class="container">
+        <h2 style="text-align: center;">Hello, Admin!</h2>
+        
+      </div>
+    </div>
+
+ <div class="w3-row-padding">
+
+<div class="w3-col w3-margin-right w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "View IP assets",all_index_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+         
+         
+</div>
+<div class="w3-col w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to 'View Users', users_path , {:style => "text-decoration:none;color:none;background-color: transparent;"} %></h3>
+          
+          
+         
+</div>
+<div class="w3-col w3-hover-shadow box1 w3-margin-left w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to 'View Discussion Forum', posts_path, {:style => "text-decoration:none;color:none;background-color: transparent;"} %></h3>
+          
+          
+         
+</div>
+<div class="w3-col w3-hover-shadow box1 w3-margin-top w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to 'View New Contacts', contact_us_path, {:style => "text-decoration:none;color:none;background-color: transparent;"} %></h3>
+          
+          
+         
+</div>
+ </div>
+  <% else %>
+      <% if current_user.try(:ip_committee?)%>
+      <div class="jumbotron abc">
+      <div class="container">
+        <h2 style="text-align: center;">Hello, IP committee member!</h2>
+        
+      </div>
+    </div>
+<div class="w3-row-padding">
+
+<div class="w3-col w3-margin-right w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "View IP assets",all_index_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+         
+          
+</div>
+
+<div class="w3-col w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "View IP Committee Members",new_index_users_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+         
+          
+          
+        
+         
+</div>
+
+<div class="w3-col w3-margin-left w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "View Not Approved IP assets",not_index_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+          
+          
+         
+</div>
+<div class="w3-col w3-margin-top w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
+
+          <h3 style="text-align: center;"><%= link_to "View Delete requests",delete_request_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+          
+          
+         
+</div>
+<div class="w3-col w3-hover-shadow box1 w3-margin-top w3-margin-left w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to 'View Discussion Forum', posts_path , {:style => "text-decoration:none;color:none;background-color: transparent;"} %></h3>
+          
+          
+         
+</div>
+<div class="w3-col w3-hover-shadow box1 w3-margin-top w3-margin-right w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "Add IP assets",new_ip_asset_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+          
+         
+</div>
+<div class="w3-col w3-hover-shadow box1 w3-margin-top w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "View your IP Assets",my_index_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+          
+        
+         
+</div>
+</div>
+       <% else %> 
+
+
+
+
+
+      
+      <div class="jumbotron abc">
+      <div class="container">
+        <h2 style="text-align: center;">Hello, <%=current_user.name%>!</h2>
+        
+      </div>
+    </div>
+
+<div class="w3-row-padding">
+
+<div class="w3-col w3-margin-right w3-hover-shadow box1 w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "View IP assets",all_index_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+</div>
+
+<div class="w3-col w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "View your IP Assets",my_index_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+          
+        
+         
+</div>
+
+<div class="w3-col w3-margin-left w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "Add IP assets",new_ip_asset_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+          
+         
+</div>
+
+<div class="w3-col w3-hover-shadow box1 w3-margin-top w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to 'View Discussion Forum', posts_path , {:style => "text-decoration:none;color:none;background-color: transparent;"} %></h3>
+          
+          
+         
+</div>
+</div>
+<% end %> 
+  <% end %>
+<% else %>
+<div class="jumbotron abc">
+      <div class="container">
+        <h2 style="text-align: center;">IP Assets Management System - IPAMS</h2>
+        <p>Welcome, to the IPAMS portal! Upload, store, get advice and revisit your ideas, projects and innovations. </p>
+        
+      </div>
+    </div>
+
+<div class="w3-row-padding">
+
+<div class="w3-col w3-margin-right w3-hover-shadow box1" style="width:394px">
+  <div class="hh ih-item circle colored effect1">
+    <a href="#">
+      <div class="spinner"></div>
+      <div class="img"><%= image_tag("2.jpg", :alt => "Sorry, could nor load image!") %></div>
+        <div class="info">
+        <div class="info-back">
+            <h3>Click the button below!</h3>
+          
+          </div>
+        </div></a></div>
+          <h3 style="text-align: center;">View IP Assets</h3>
+          <p>Read projects/journals authored by our users.</p>
+          <%= link_to "View IP assets",all_index_ip_assets_path, class:"col-sm-offset-4 col-sm-4 w3-btn w3-blue w3-hover-green"%>
+          
+         
+</div>
+
+<div class="w3-col w3-hover-shadow box2" style="width:394px">
+ <div class="hh ih-item circle colored effect1"><a href="#">
+        <div class="spinner"></div>
+        <div class="img"><%= image_tag("4.jpg", :alt => "Sorry, could nor load image!") %></div>
+        <div class="info">
+          <div class="info-back">
+               <h3>Click the button below!</h3>
+            
+          </div>
+        </div></a></div>
+          <h3 style="text-align: center;">What is this website?</h3>
+          <p>Know more about this website and its potential that has been powering our community of users.</p>
+          <%= link_to 'Explore', page_path('about'), class: "col-sm-offset-4 col-sm-4 w3-btn w3-blue w3-hover-green" %>
+          
+
+
+          
+</div>
+
+<div class="w3-col w3-margin-left w3-hover-shadow box2" style="width:394px">
+ <div class="hh ih-item circle colored effect1"><a href="#">
+        <div class="spinner"></div>
+        <div class="img"><%= image_tag("creative-ideas-banner.jpg", :alt => "Sorry, could nor load image!") %></div>
+        <div class="info">
+          <div class="info-back">
+             <h3>Click the button below!</h3>
+           
+            
+          </div>
+        </div></a></div>
+          <h3 style="text-align: center;">Contact Us</h3>
+          <p>Have an idea that you want to work on? Join us, upload it now and work in a protected and efficient environment. You can team up with others and watch your idea grow from just an idea to a patented IP asset you own.</p>
+          <%= link_to 'Sign up', new_contact_u_path, class:"col-sm-offset-4 col-sm-4 w3-btn w3-blue w3-hover-green" %>
+         
+</div>
+
+
+</div>
+<% end %>
+
+
+
+
+
+
+
+
+
