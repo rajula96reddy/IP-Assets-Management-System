@@ -1,11 +1,40 @@
 <div class="jumbotron abc">
-<h1>
+<h2>Showing Post</h2>
+<hr class="featurette-divider1">
+<h3> <b>Title:</b>
   <%= @post.title %>
-</h1>
+</h3>
+<h3> <b>Content:</b></h3>
 <p>
+
   <%= @post.content %>
 </p>
-<%= link_to "Edit", edit_post_path(@post) %>
-<%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure"} %>
-<%= link_to "Home", root_path %>
+<h3> <b>Comments:</b></h3>
+<% @post.comments.each do |comment| %>
+  <p>
+    <b>Commenter:</b>
+    <%= comment.commenter %>
+  </p>
+  <p>
+    <b>Comment:</b>
+    <%= comment.body %>
+  </p>
+<% end %>
+<h3> <b>Add a comment:</b></h3>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+  <div class="field">
+    <%= f.label :commenter %>
+    <br/>
+    <%= f.text_field :commenter %>
+  </div>
+  <div class="field">
+    <%= f.label :body %>
+    <br/>
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create new comment", class: "btn btn-primary" %>
+  </div>
+<% end %>
+<%= link_to "Home", root_path , :class => "btn btn-primary"%>
 </div>

@@ -36,8 +36,9 @@
 </table>
 
 <br>
-
+<% if !current_user.try(:admin?) %>
 <%= link_to 'New Contact Us form', new_contact_u_path,class: "btn btn-primary" %>
+<% end%>
 </div>
 </div>
 </div>

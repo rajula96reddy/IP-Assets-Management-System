@@ -28,8 +28,9 @@
 @media (min-width: 768px) {
   .sidebar {
     position: absolute;
-    top: 51px;
-    bottom: 0;
+    padding-top: 10px;
+    top: 110px;
+    bottom: 13px;
     left: 0;
     z-index: 1000;
     display: block;
@@ -37,6 +38,7 @@
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #F0FFFF;
     border-right: 1px solid #eee;
+    border-radius: 7px;
   }
 }
 .nav-sidebar {

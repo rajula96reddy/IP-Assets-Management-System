@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get 'resumes/create'
 
   get 'resumes/destroy'
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
   resources :ownerships
   resources :ip_assets do
     collection do
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
       get:'set_not_edit'
       get:'set_not_delete'
       get:'all_index'
+      get:'not_index'
     end
   end
   root to: 'visitors#index'

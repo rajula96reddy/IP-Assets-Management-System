@@ -19,6 +19,8 @@ class IpAsset < ApplicationRecord
 validate :sum_100
 validate :Is_IIITB
 validate :IIITB_stake
+
+
 def Is_IIITB
   if self.ownerships.present?
   @o=self.ownerships
@@ -28,7 +30,7 @@ def Is_IIITB
   if @o.present?
     # @a=@o.select{|o| o.user_id =='6'}
     # p @a.any?
-    if !(@o.select{|o| o.user_id ==6}).any?
+    if !(@o.select{|o| o.user_id ==5}).any?
         errors.add(:ip_asset, "IIITB must be one of the owners")
     end
    end
@@ -38,8 +40,8 @@ def IIITB_stake
   if self.ownerships.present?
   @o=self.ownerships
   if @o.present?
-    if (@o.select{|o| o.user_id ==6}).any?
-        @a=(@o.select{|o| o.user_id ==6}) 
+    if (@o.select{|o| o.user_id ==5}).any?
+        @a=(@o.select{|o| o.user_id ==5}) 
         p @o
         p 'AA'
         # p @a.select{}

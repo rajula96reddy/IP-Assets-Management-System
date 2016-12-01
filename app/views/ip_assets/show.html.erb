@@ -10,6 +10,10 @@
   <%= @ip_asset.Description %>
 </p>
 <p>
+  <strong>Type:</strong>
+  <%= @ip_asset.Type %>
+</p>
+<p>
 <strong>Owners:</strong>
 <ol>
 <%for user in @ip_asset.users%>
@@ -17,11 +21,13 @@
 <p><%=h user.name%></p>
 <% end %>
 </ol>
-</p>
+
+
+<!-- </p>
 <p>
   <strong>Labs associated:</strong>
   <%= @ip_asset.Labs_Associated %>
-</p>
+</p> -->
 <p>
   <strong>Document:</strong>
   <%= link_to "Resume",@ip_asset.attachment_url %>

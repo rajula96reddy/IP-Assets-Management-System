@@ -1,5 +1,5 @@
 class IpAssetsController < ApplicationController
-  before_action :set_ip_asset, only: [:show, :edit, :update, :destroy,:copy]
+  before_action :set_ip_asset,:Find, only: [:show, :edit, :update, :destroy,:copy]
 
   # GET /ip_assets
   # GET /ip_assets.json
@@ -9,19 +9,44 @@ class IpAssetsController < ApplicationController
     
    
     if params[:search]
-      @ip_assets = IpAsset.search(params[:search], params[:search_column4])
+      @ip_assets = IpAsset.search(params[:search], params[:search_column4]).where("status ='Approved'")
     else
-      @ip_assets = IpAsset.all.order('created_at ASC')
+      @ip_assets = IpAsset.all.order('created_at ASC').where("status ='Approved'")
     end
      if params[:search_column3]
-      @ip_assets=IpAsset.search1(params[:search_column3], params[:search_column2],params[:search_column4])
+      @ip_assets=IpAsset.search1(params[:search_column3], params[:search_column2],params[:search_column4]).where("status ='Approved'")
     end
     if params[:search_column5]
       if(params[:search_column5]!='Display all IP-assets' && params[:search_column5]!='SELECT NUMBER OF IP ASSETS TO BE DISPLAYED')
-      @ip_assets=IpAsset.all.first(params[:search_column5].to_i)
+      @ip_assets=IpAsset.all.first(params[:search_column5].to_i).where("status ='Approved'")
     else
       
-      @ip_assets = IpAsset.all
+      @ip_assets = IpAsset.all.where("status ='Approved'")
+    end
+    end
+    
+   
+    
+  end
+  def not_index
+    # @ip_assets = IpAsset.where("status ='Not_approved'").all
+   
+    
+   
+    if params[:search]
+      @ip_assets = IpAsset.search(params[:search], params[:search_column4]).where("status ='Not_approved'")
+    else
+      @ip_assets = IpAsset.all.order('created_at ASC').where("status ='Not_approved'")
+    end
+     if params[:search_column3]
+      @ip_assets=IpAsset.search1(params[:search_column3], params[:search_column2],params[:search_column4]).where("status ='Not_approved'")
+    end
+    if params[:search_column5]
+      if(params[:search_column5]!='Display all IP-assets' && params[:search_column5]!='SELECT NUMBER OF IP ASSETS TO BE DISPLAYED')
+      @ip_assets=IpAsset.all.first(params[:search_column5].to_i).where("status ='Not_approved'")
+    else
+      
+      @ip_assets = IpAsset.all.where("status ='Not_approved'")
     end
     end
     
@@ -142,11 +167,33 @@ class IpAssetsController < ApplicationController
     @ip_asset = IpAsset.new
     # @ownerships=
     @ip_asset.ownerships.build
-    # 3.times{ @ip_asset.ownerships.build }
+    # 1.times{ @ip_asset.ownerships.build }
     # @ownership=Ownership.create(:ip_asset_id=> @ip_asset.id,:user_id=>@ip_asset.user_id)
     # @ownership.save
+    number = 0
+    @owner =User.all
+  @owner.each do |ner|
+    p ner.role
+    if(ner.role =="ip_committee")
+      number = number + 1
+    end
+  end
+  p "Numbers"
+  p number
+  if(number <3)
+    Notification.create(:user_id=>1,:content=>  " Number of IP Committe members are less")
   end
 
+  end
+def Min_Num
+  @owners = Owners.all
+  number = 0
+  @owners.each do |owner|
+    if(owner.role==1)
+      number = number + 1
+    end
+  end
+end
   # GET /ip_assets/1/edit
   def edit
 
@@ -194,7 +241,8 @@ class IpAssetsController < ApplicationController
     @owners.each do |owner|
     @notification = Notification.create(:user_id=>owner.user_id,:content=>  " Your IP Asset:{@ip_asset.Description} has been approved")
     end
-    redirect_to @ip_asset
+     @owners = Owners.all
+      redirect_to @ip_asset
     
   end
   def set_edit
@@ -237,6 +285,7 @@ class IpAssetsController < ApplicationController
   # POST /ip_assets
   # POST /ip_assets.json
   def create
+
     @ip_asset = IpAsset.new(ip_asset_params)
     @ip_asset.status='Not_approved'
     @ip_asset.user_id=current_user.id
@@ -323,6 +372,18 @@ class IpAssetsController < ApplicationController
     def set_ip_asset
       @ip_asset = IpAsset.find(params[:id])
     end
+    def Find
+          number = 0
+    @owners =Owner.all
+  @owners.each do |owner|
+    if(owner.role==1)
+      number = number + 1
+    end
+  end
+  if(number <3)
+    Notification.create(:user_id=>1,:content=>  " Number of IP Committe members are less")
+  end
+end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ip_asset_params

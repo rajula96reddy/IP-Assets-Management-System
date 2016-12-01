@@ -1,0 +1,16 @@
+<li class="control-group nested-fields">
+  <div class="field">
+
+  <%= f.label "College" %>
+      <!-- <%=f.text_field:user_id ,{:value=>'1',:readonly=>true,}%>  -->
+      <%=f.collection_select(:user_id,User.all,:id,:name,{:selected_value => User.find(2)})%>
+      <!--,:disabled => "disabled")-->
+        <%= f.label :stakeholding_percentage, "Stakeholding Percentage" %>
+    <%= f.number_field :stakeholding_percentage%></br>
+ <!--     <%=f.collection_select(:user_id,User.all,:id,:name)%>
+        <%= f.label :stakeholding_percentage, "Stakeholding Percentage" %>
+    <%= f.text_field :stakeholding_percentage %> -->
+
+       
+  </div>
+</li>

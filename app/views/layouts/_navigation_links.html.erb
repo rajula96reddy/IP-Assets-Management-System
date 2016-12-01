@@ -6,10 +6,12 @@
 
 <% if user_signed_in? %>
 <li><%= link_to 'Edit-Account', edit_user_registration_path , {:class => "glyphicon glyphicon-cog",:style => "color: white;"}%></li>
-<li><%= link_to 'Notifications', notifications_path, {:class => "glyphicon glyphicon-user",:style => "color: white;"} %></li>
+<li><%= link_to 'Notifications', notifications_path, {:class => "glyphicon glyphicon-user",:style => "color: white;"} %>
+</li>
+<li><%= link_to 'IP-Committee-Members', new_index_users_path, {:class => "glyphicon glyphicon-user",:style => "color: white;"} %></li>
  <% if current_user.try(:admin?) %>
     <li><%= link_to 'Users', users_path , {:class => "glyphicon glyphicon-user",:style => "color: white;"} %></li>
-    <li><%= link_to 'IP-Committee-Members', new_index_users_path, {:class => "glyphicon glyphicon-user",:style => "color: white;"} %></li>
+    
     <li><%= link_to 'New-Contacts', contact_us_path, {:class => "glyphicon glyphicon-user",:style => "color: white;"} %></li>
   <% end %>
   <% end %>

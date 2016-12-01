@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def secure_params
-    params.require(:user).permit(:role,:ip_assets_attributes)
+    params.require(:user).permit(:role,:ip_assets_attributes,:posts_attributes)
   end
 
 end

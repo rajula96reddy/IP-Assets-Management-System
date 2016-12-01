@@ -10,9 +10,10 @@
 
                 <th style="text-align:center">User Name</th>
                   <th style="text-align:center">User Email</th>
+                   <% if current_user.try(:admin?) %>
                   <th style="text-align:center">Role</th>
                   <th style="text-align:center">Deletion</th>
-                  
+                  <% end%>
                 </tr>
               </thead>
               <tbody>

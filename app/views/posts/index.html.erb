@@ -1,5 +1,7 @@
+
 <div class="jumbotron abc">
-<%= link_to "New Post", new_post_path %>
+<h2>Posts</h2>
+<hr class="featurette-divider1">
 <% @posts.each do |post| %>
   <h2>
     <%= link_to post.title, post %>
@@ -7,7 +9,9 @@
   Published at
   <%= time_ago_in_words(post.created_at) %>
   by
-  <%= post.user.email %>
+  <%= post.user.name %>
   <% # to add email error as no email %>
 <% end %>
+<br/>
+<%= link_to "New Post", new_post_path, :class => "btn btn-primary" %>
 </div>

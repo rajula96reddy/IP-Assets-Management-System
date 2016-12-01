@@ -35,12 +35,14 @@
     <%= f.label :"Is this funded by college?" %>
 
      <%= f.select :Is_funded_by_colege, ["true", "false"] %>
+     ⓘ College funded IP assets require a minimum of 50% stakeholding percentage for the respective college
   </div>
   <!--   <div class="field">
     <%= f.label :"Is it Licensed?" %>
     <%= f.radio_button :Is_licensed,'true'%> Yes 
     <%= f.radio_button :Is_licensed,'false'%> No 
   </div> -->
+
   <div class="field">
 <div id="ownerships">
     <%= f.fields_for :ownerships,Ownership.new do |ownership| %>
@@ -54,7 +56,7 @@
 
   <div class="field">
     <%= f.label :Document %>
-    <%= f.file_field :attachment %>
+    <%= f.file_field :attachment %> 
   </div>
 
 

@@ -67,15 +67,7 @@
 
 <div class="w3-col w3-margin-left w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
   
-          <h3 style="text-align: center;"><%= link_to "View Not Approved IP assets",ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
-          
-          
-          
-         
-</div>
-<div class="w3-col w3-margin-top w3-margin-right w3-hover-shadow box1  w3-blue w3-hover-green" style="width:394px">
- 
-          <h3 style="text-align: center;"><%= link_to "View Edit requests",edit_request_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          <h3 style="text-align: center;"><%= link_to "View Not Approved IP assets",not_index_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
           
           
           
@@ -96,7 +88,21 @@
           
          
 </div>
-
+<div class="w3-col w3-hover-shadow box1 w3-margin-top w3-margin-right w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "Add IP assets",new_ip_asset_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+          
+         
+</div>
+<div class="w3-col w3-hover-shadow box1 w3-margin-top w3-blue w3-hover-green" style="width:394px">
+  
+          <h3 style="text-align: center;"><%= link_to "View your IP Assets",my_index_ip_assets_path, {:style => "text-decoration:none;color:none;background-color: transparent;"}%></h3>
+          
+          
+        
+         
+</div>
 </div>
        <% else %> 
 
